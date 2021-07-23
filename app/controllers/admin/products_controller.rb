@@ -1,6 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  http_basic_authenticate_with name: ENV["ADMIN_AUTH_USERNAME"], password: ENV["ADMIN_AUTH_PASSWORD"]
-  # if: -> { request.subdomain == "admin" }
+  http_basic_authenticate_with name: ENV["ADMIN_AUTH_USERNAME"], password: ENV["ADMIN_AUTH_PASSWORD"], if: -> { request.subdomain == "admin" }
 
   def index
     @products = Product.order(id: :desc).all
